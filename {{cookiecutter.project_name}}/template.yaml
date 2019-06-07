@@ -1,0 +1,34 @@
+Resources:
+  default:
+    Type: TencentCloud::Serverless::Namespace
+    helloworld:
+      Type: TencentCloud::Serverless::Function
+      Properties:
+        CodeUri: ./api_gw_basic_demo
+        Description: This demo uses API GW trigger and SCF to build WEB backend service.It is mainly to show how to build return value
+        Environment:
+          Variables:
+            ENV_FIRST: env1
+            ENV_SECOND: env2
+        Handler: api_gw_basic_demo.main_handler
+        MemorySize: 128
+        {%- if cookiecutter.runtime == 'Python2.7' %}
+        Runtime: Python2.7
+        {%- elif cookiecutter.runtime == 'Python3.6' %}
+        Runtime: Python3.6
+        {%- else %}
+        Runtime: Python3.6
+        {%- endif %}
+        Timeout: 3
+        Events:
+            api_gw_basic_demo_apigw:  # ${FunctionName} + '_apigw'
+                Type: APIGW
+                Properties:
+                    StageName: release
+                    HttpMethod: ANY
+                    Auth: FALSE
+                    ServiceName: SCF_API_SERVICE
+
+Globals:
+  Function:
+    Timeout: 10
