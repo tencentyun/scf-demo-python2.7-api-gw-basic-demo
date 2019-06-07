@@ -26,8 +26,6 @@ Resources:
                 Properties:
                     StageName: release
                     HttpMethod: ANY
-                    Auth: FALSE
-                    ServiceName: SCF_API_SERVICE
 
 Globals:
   Function:
