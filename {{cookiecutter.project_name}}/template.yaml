@@ -1,7 +1,7 @@
 Resources:
   default:
     Type: TencentCloud::Serverless::Namespace
-    helloworld:
+    api_gw_basic_demo:
       Type: TencentCloud::Serverless::Function
       Properties:
         CodeUri: ./api_gw_basic_demo
